@@ -1,0 +1,88 @@
+3.HAFTA Histogram
+
+In [1]:
+my_list_1=[2,4,3,40,5,6,3,3,2,1]
+def my_fun_1(my_list_1=[2,4,3,40,5,6,3,3,2,1]):
+    t=0
+    s=0
+    for i in my_list_1:
+        s=s+1
+        t=t+i
+    ortalama=t/s
+    
+    t=0
+    s=0
+    for i in my_list_1:
+        s=s+1
+        t=t+(i-ortalama)*(i-ortalama)
+    varyans=t/(s-1)
+    
+    return ortalama, varyans
+my_fun_1()
+
+Out[1]:
+(6.9, 137.43333333333334)
+
+In [2]:
+#histogram bilgisini elde etme:
+my_histogram={} #erişimin hızlı olması için
+for i in my_list_1:
+    if i in my_histogram.keys():
+        my_histogram[i]=my_histogram[i]+1 #listede bu eleman varsa sayıyı 1 arttır
+    else:
+        my_histogram[i]=1 #eğer o eleman daha önce bulunmadıysa 1 yazdır
+my_histogram #çıktı -> 2 sayısı 2 tane var, 4 sayısı 1 tane var
+
+Out[2]:
+{2: 2, 4: 1, 3: 3, 40: 1, 5: 1, 6: 1, 1: 1}
+
+In [3]:
+my_histogram={}
+my_histogram[1]=10
+my_histogram[2]=34
+my_histogram[25]=14
+#my_histogram #hangi elemandan kaç tane olduğunu listeler
+#my_histogram.keys() #eleman var mı yok mu?
+for i in my_histogram.keys():
+    print(i,my_histogram[i])
+
+1 10
+2 34
+25 14
+
+In [4]:
+import matplotlib.pyplot as plt
+import numpy as np
+im_1=plt.imread('a.jpg')
+#im_1.shape #en,boy,color
+im_1.ndim,im_1.shape
+
+Out[4]:
+(3, (168, 299, 3))
+
+In [5]:
+#histogramı bulan fonksiyon:
+def my_fun_2(im_1=plt.imread('a.jpg')):
+    m,n,p=im_1.shape
+    my_histogram={}
+    for i in range (m):
+        for j in range (n):
+            if im_1[i,j,0] in my_histogram.keys():
+                my_histogram[im_1[i,j,0]]=my_histogram[im_1[i,j,0]]+1
+            else:
+                my_histogram[im_1[i,j,0]]=1
+    return my_histogram
+
+In [6]:
+def my_fun_3(my_histogram=my_fun_2()):
+    x=[] #soldaki değerler
+    y=[] #sağdaki değerler
+    for key in my_histogram.keys():
+        x.append(key)
+        y.append(my_histogram[key])
+    return x,y
+
+In [7]:
+x,y=my_fun_3()
+plt.bar(x,y) #grafiğe aktarma
+plt.show()
