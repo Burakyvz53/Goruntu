@@ -1,0 +1,64 @@
+#1.HAFTA Bir resmin rengini değiştirme ve 90 derece döndürme işlemi
+
+In [2]:
+import os
+os.getcwd()
+os.listdir()
+
+Out[2]:
+['.ipynb_checkpoints', 'a.png', 'Untitled.ipynb']
+
+In [11]:
+import numpy as np
+import matplotlib.pyplot as plt
+im=plt.imread('a.png')
+type(im)
+im.shape
+
+Out[11]:
+(356, 885, 3)
+
+In [12]:
+im[100,100,:] #100,100 konumundaki renk değerleri
+
+Out[12]:
+array([0.21960784, 0.31764707, 0.42745098], dtype=float32)
+
+In [13]:
+m,n,p = im.shape #resmin konum ve boyut değerlerini sırasıyla m,n,p'ye atar.
+m,n,p
+
+Out[13]:
+(356, 885, 3)
+
+In [18]:
+plt.imshow(im)
+plt.show() #resmi yazdırıyor
+
+In [20]:
+#Resmi siyah beyaz yapmak için: her pixel'i RGB'nin ortalamasına eşitliyoruz.
+
+new_im=np.zeros((m,n),dtype=float) 
+
+for i in range (m):
+    for j in range (n):
+        s=(im[i,j,0]+im[i,j,1]+im[i,j,2])/3
+        new_im[i,j]=s
+
+plt.imshow(new_im,cmap='gray')
+plt.show() 
+plt.imsave('siyahbeyaz.png',new_im,cmap='gray')
+
+In [21]:
+#Resmi 90 derece döndürmek için:
+
+new_im=np.zeros((n,m),dtype=float) 
+
+for i in range (m):
+    for j in range (n):
+        s=(im[i,j,0]+im[i,j,1]+im[i,j,2])/3
+        new_im[j,i]=s
+
+plt.imshow(new_im,cmap='gray')
+plt.show() 
+plt.imsave('doksanderece.png',new_im,cmap='gray')
