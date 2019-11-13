@@ -1,0 +1,147 @@
+#2.HAFTA: 
+
+In [1]:
+my_list=[9,3,5,6,2,3,6]
+my_list
+
+Out[1]:
+[9, 3, 5, 6, 2, 3, 6]
+
+In [2]:
+for i in my_list:
+    #listeyi tek tek dolaşır.
+    print(i)
+9
+3
+5
+6
+2
+3
+6
+
+In [3]:
+for i in range(len(my_list)):
+    #listeyi eleman sayısı kadar dolaşır, kaçıncı olduğunu bulmamız gerektiğinde kullanıır.
+    print(i,my_list[i])
+0 9
+1 3
+2 5
+3 6
+4 2
+5 3
+6 6
+
+In [4]:
+def list_deneme(my_list=[9,3,5,6,2,3,6]):
+    for i in range(len(my_list)):
+        my_list[i]=my_list[i]+1
+    print(my_list)
+list_deneme([5,5,5,5,5,5,5,5])
+list_deneme() #default olarak [9,3,5,6,2,3,6] listesini kullanır.
+#my_fun_1(['bir',5,5,5,5,5,5,5]) #String+1 olamayacağı için hata verir.
+[6, 6, 6, 6, 6, 6, 6, 6]
+[10, 4, 6, 7, 3, 4, 7]
+
+In [5]:
+import numpy as np
+my_list_1=np.array([3,3,3,3,3,3]) #ndarray
+my_list_1+1
+
+Out[5]:
+array([4, 4, 4, 4, 4, 4])
+
+In [6]:
+def np_list_deneme(my_array=np.array([3,3,3,3,3,3])):
+    return my_array-10
+np_list_deneme()
+
+Out[6]:
+array([-7, -7, -7, -7, -7, -7])
+
+In [7]:
+import numpy as np
+import matplotlib.pyplot as plt
+im_1=plt.imread('a.jpg')
+plt.imshow(im_1)
+plt.show()
+<Figure size 640x480 with 1 Axes>
+
+In [8]:
+m,n,p=im_1.shape
+im_2=np.zeros((m,n,3),dtype=int)
+for m in range(im_1.shape[0]): #shape olduğu için 'range' olmalı
+    for n in range(im_1.shape[1]):
+        im_2[m,n,0]=im_1[m,n,0]+100
+        im_2[m,n,1]=im_1[m,n,0]
+        im_2[m,n,2]=im_1[m,n,0]
+        #pixel pixel gezip her pixel'i im_2 ye atarken işlem yapar
+        
+plt.imshow(im_2)
+plt.show()
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+In [9]:
+def red_deger(im_3,s=5):
+    #gönderilen resmin kırmızı değerini gönderilen s değerine göre arttıran/azaltan fonksiyon
+    im_1=im_3
+    m,n,p=im_1.shape
+    im_2=np.zeros((m,n,3),dtype=int)
+    m,n,p=im_2.shape
+    for m in range(im_1.shape[0]): #shape olduğu için 'range' eklenmeli
+        for n in range(im_1.shape[1]):
+            im_2[m,n,0]=im_1[m,n,0]-s
+            im_2[m,n,1]=im_1[m,n,0]
+            im_2[m,n,2]=im_1[m,n,0]
+            #pixel pixel gezip her pixel'i im_2 ye atarken işlem yapar
+    return im_3
+im_ret=red_deger(im_1,100)
+plt.imshow(im_ret)
+plt.show()
+
+In [10]:
+def boyutlandir(im_4):
+    #gönderilen mxn lik resmi m/2 x n/2 lik yapan fonksiyon
+    m,n,p=im_4.shape
+    new_m=int(m/2)
+    new_n=int(n/2)
+    im_5=np.zeros((new_m,new_n),dtype=int)
+    for m in range(new_m): 
+        for n in range(new_n):
+            s=(im_4[m*2,n*2,0]+im_4[m*2,n*2,1]+im_4[m*2,n*2,2])/3
+            im_5[m,n]=int(s)
+    return im_5
+
+In [11]:
+plt.imshow(im_1)
+plt.show()
+im_6=boyutlandir(im_1)
+plt.imshow(im_6,cmap='gray')
+plt.show()
+
+C:\ProgramData\Anaconda3\lib\site-packages\ipykernel_launcher.py:9: RuntimeWarning: overflow encountered in ubyte_scalars
+  if __name__ == '__main__':
+
+In [12]:
+def bozulmadan_boyutlandir(im_7):
+    m,n,p=im_7.shape
+    new_m=int(m/2)
+    new_n=int(n/2)
+    im_8=np.zeros((new_m,new_n,3),dtype=int)
+    for m in range(new_m): 
+        for n in range(new_n):
+            im_8[m,n,0]=int(im_7[m*2,n*2,0])
+            im_8[m,n,1]=int(im_7[m*2,n*2,1])
+            im_8[m,n,2]=int(im_7[m*2,n*2,2])
+    return im_8
+
+plt.imshow(im_1)
+plt.show()
+im_8=bozulmadan_boyutlandir(im_1)
+plt.imshow(im_8)
+plt.show()
+im_9=bozulmadan_boyutlandir(im_8)
+plt.imshow(im_9)
+plt.show()
+im_10=bozulmadan_boyutlandir(im_9)
+plt.imshow(im_10)
+plt.show()
