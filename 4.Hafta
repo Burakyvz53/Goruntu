@@ -1,4 +1,4 @@
-4.HAFTA
+4.HAFTA Ortalama,Varyans,Standart Sapma
 
 In [1]:
 #https://www.python-course.eu/neural_network_mnist.php
@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 In [3]:
-data_path = "C:/Users/Ebru/Desktop/gi_deneme/ders4/" 
+data_path = "C:/Users/Burak/Desktop/gi_deneme/4.Hafta/" 
 train_data = np.loadtxt(data_path + "mnist_train.csv", delimiter=",") 
 test_data = np.loadtxt(data_path + "mnist_test.csv", delimiter=",")
 
@@ -84,6 +84,7 @@ def my_count(k=0):
 for i in range(10):
     c=my_count(i)
     print(i," ",c) # 0-10 sayılarından kaçar tane olduğunu yazdırır.
+
 0   5923
 1   6742
 2   5958
@@ -123,7 +124,9 @@ for i in range (m):
         t=t+diff_1*diff_1
 std_1=np.sqrt(t/(s-1))
 print(mean_1,std_1)
+
 22.705723450953908 61.8672005389669
+
 In [25]:
 #yukarıdaki kodları fonksiyon haline getirdik: 
 def get_my_mean_and_std(k=0,l=0):
